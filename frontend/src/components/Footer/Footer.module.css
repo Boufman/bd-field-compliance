@@ -1,0 +1,31 @@
+/* src/components/Footer/Footer.module.css */
+
+.appFooter {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--cp-text-secondary);
+}
+
+.complicoMark {
+  width: 60px;
+  height: 60px;
+  border-radius: 90%;
+  background: radial-gradient(circle at top, #1f2937 0, #020617 70%);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.complicoMark img {
+  max-width: 150%;
+  max-height: 150%;
+  object-fit: contain;
+}

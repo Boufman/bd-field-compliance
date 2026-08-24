@@ -1,0 +1,114 @@
+/* Results.module.css — ColdProof v3.6 */
+
+.resultsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sectionTitle {
+  font-family: "Times New Roman", "Trajan Pro", serif;
+  font-size: 20px;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.sectionSubtitle {
+  margin: 0;
+  font-size: 12px;
+  color: var(--cp-text-secondary);
+}
+
+.resultsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .resultsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.resultBlock {
+  border-radius: var(--cp-radius-md);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: radial-gradient(circle at top left, #020617, #020617 40%, #000);
+  padding: 16px 16px 14px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resultBlock h3 {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.resultRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.resultLabel {
+  font-weight: 600;
+  color: #cbd5f5;
+}
+
+.resultValue {
+  text-align: right;
+}
+
+/* GEYER */
+.geyerBlock {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.geyerHeader {
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.geyerTag {
+  padding: 2px 6px;
+  font-size: 11px;
+  border-radius: 4px;
+}
+
+.levelGREEN { background: #064e3b; color: #4ade80; }
+.levelYELLOW { background: #78350f; color: #fbbf24; }
+.levelRED { background: #7f1d1d; color: #f87171; }
+.levelNEUTRAL { background: #1e293b; color: #94a3b8; }
+
+.headline {
+  margin-top: 4px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.explanation {
+  margin-top: 2px;
+  color: var(--cp-text-secondary);
+}
+
+.fridgeSummary {
+  margin-top: 4px;
+  color: var(--cp-text-secondary);
+}
+
+.amPmNote {
+  margin-top: 10px;
+  font-size: 11px;
+  border-left: 3px solid var(--cp-cyan);
+  padding-left: 8px;
+  color: #e0f2fe;
+}

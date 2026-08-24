@@ -1,0 +1,26 @@
+.button {
+  background: #d4af37;           /* Gold */
+  color: #1a1a1a;
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.button:hover {
+  background: #e7c45a;
+  transform: translateY(-1px);
+}
+
+.button:active {
+  background: #c59c2e;
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

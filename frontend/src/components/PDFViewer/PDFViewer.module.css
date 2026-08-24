@@ -1,0 +1,13 @@
+.viewerContainer {
+  margin-top: 25px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 600px;
+}
+
+.frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

@@ -1,0 +1,390 @@
+{
+  "classification": "REPORTABLE BREACH",
+  "total_excursions": 42,
+  "reportable_count": 1,
+  "excursions": [
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 13.3,
+      "actual_exposure_min": 0.0,
+      "reportable": true
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.2,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-09-2024 00:00",
+      "end": "09-09-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.2,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 10.9,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-10-2024 00:00",
+      "end": "09-10-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-11-2024 00:00",
+      "end": "09-11-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.7,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-11-2024 00:00",
+      "end": "09-11-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-11-2024 00:00",
+      "end": "09-11-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-11-2024 00:00",
+      "end": "09-11-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-11-2024 00:00",
+      "end": "09-11-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-11-2024 00:00",
+      "end": "09-11-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-11-2024 00:00",
+      "end": "09-11-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-11-2024 00:00",
+      "end": "09-11-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.1,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-11-2024 00:00",
+      "end": "09-11-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.2,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    },
+    {
+      "start": "09-11-2024 00:00",
+      "end": "09-11-2024 00:00",
+      "duration_min": 0.0,
+      "max_temp": 8.9,
+      "actual_exposure_min": 0.0,
+      "reportable": false
+    }
+  ],
+  "lag_applied_min": 12.5,
+  "data_points": 31146,
+  "min_temp": 6.9,
+  "max_temp": 13.3,
+  "source_file": "SENSOR05.CSV",
+  "generated": "08-12-2025 15:44",
+  "geyer": {
+    "level": "RED",
+    "label": "GEYER RED",
+    "headline": "Critical breach",
+    "recommendation": "Immediate quarantine and follow regulator/TGA advice.",
+    "colour": "#D32F2F"
+  },
+  "fridge_signature": {
+    "fridge_type": "Domestic/Bar Fridge (Non-Compliant)",
+    "range": 6.4,
+    "std": 1.26,
+    "notes": [
+      "Wide range and/or high variability suggests domestic/non-compliant fridge."
+    ]
+  },
+  "summary": {
+    "classification": "REPORTABLE BREACH",
+    "geyer": {
+      "level": "RED",
+      "label": "GEYER RED",
+      "headline": "Critical breach",
+      "recommendation": "Immediate quarantine and follow regulator/TGA advice.",
+      "colour": "#D32F2F"
+    },
+    "fridge_signature": {
+      "fridge_type": "Domestic/Bar Fridge (Non-Compliant)",
+      "range": 6.4,
+      "std": 1.26,
+      "notes": [
+        "Wide range and/or high variability suggests domestic/non-compliant fridge."
+      ]
+    },
+    "min_temp": 6.9,
+    "max_temp": 13.3,
+    "total_excursions": 42,
+    "reportable_count": 1
+  },
+  "am_pm_logging": {
+    "required": true,
+    "note": "Record MIN/MAX twice daily as per Strive for 5."
+  }
+}
