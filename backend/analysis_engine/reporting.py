@@ -1,6 +1,8 @@
 """
-Field Compliance – aggregation & KPI engine.
-Produces the exact data structure required by the rebuilt PDF builder.
+Fortnightly Report – aggregation & KPI engine.
+KPI: for now always Achieved (green), using total_time_resolved.
+Callouts: only from Callout column.
+Period ends at yesterday (exclude day of run).
 """
 from __future__ import annotations
 
@@ -31,6 +33,15 @@ def _prev_n_months(ref: date, n: int) -> Tuple[date, date]:
     return start, end
 
 
+def _kpi_status(r: Dict) -> str:
+    """
+    Temporary rule: always Achieved (green).
+    total_time_resolved is carried through so real thresholds can be added later.
+    """
+    _ = r.get("total_time_resolved")
+    return "Achieved"
+
+
 def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date] = None) -> Dict[str, Any]:
     if not records:
         return {"error": "No records", "sections": {}}
@@ -41,8 +52,16 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
 
     latest = max(dates)
     earliest = min(dates)
-    period_end = report_period_end or latest
-    period_start = period_end - timedelta(days=13)
+
+    # Cut off at end of yesterday so a Thursday run covers data up to Wednesday 23:59
+    yesterday = date.today() - timedelta(days=1)
+
+    if report_period_end is not None:
+        period_end = report_period_end
+    else:
+        period_end = min(latest, yesterday)
+
+    period_start = period_end - timedelta(days=13)  # 14 calendar days inclusive
 
     mtd_start = _month_start(period_end)
     ytd_start = date(period_end.year, 1, 1)
@@ -52,10 +71,6 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
     ytd_records = [r for r in records if _in_range(r["date_submitted"], ytd_start, period_end)]
 
     def _wo_row(r: Dict) -> Dict:
-        # Correct rule: only "Not Achieved" when Breach? column is Yes
-        breach_val = str(r.get("breach") or "").strip().upper()
-        kpi = "Not Achieved" if breach_val in ("YES", "TRUE", "Y") else "Achieved"
-
         return {
             "work_order": r["work_order"],
             "time_of_attendance": f"{r.get('date_start') or r.get('date_submitted')} {r.get('time_start') or ''}".strip(),
@@ -66,13 +81,13 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
             "equipment_type": r.get("product_classification") or "",
             "product_type": r.get("product_classification") or "",
             "asset_number": r.get("asset_number") or "",
-            "kpi_3_4": kpi,
+            "kpi_3_4": _kpi_status(r),
+            "total_time_resolved": r.get("total_time_resolved"),
             "completion_comments": r.get("completion_comments") or "",
             "department": r.get("department") or "",
             "completed_by": r.get("completed_by") or "",
             "cubie": r.get("cubie_replaced", False),
-            "weekend": r.get("weekend", False) or bool(r.get("saturday_or_sunday")),
-            "outside_hours": not r.get("between_8_and_8", True),
+            "callout": bool(r.get("callout")),
             "date_submitted": r.get("date_submitted"),
         }
 
@@ -89,18 +104,19 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
         monthly_counts[key] += 1
     avg_3m = round(sum(monthly_counts.values()) / max(len(monthly_counts), 1), 1)
 
+    monthly_all: Dict[str, int] = defaultdict(int)
+    for r in records:
+        if r["date_submitted"] and r["date_submitted"] <= period_end:
+            monthly_all[r["date_submitted"].strftime("%Y-%m")] += 1
+
     # CUBIEs
     cubies_week = sum(1 for r in week_records if r.get("cubie_replaced"))
     cubies_mtd = sum(1 for r in mtd_records if r.get("cubie_replaced"))
     cubies_ytd = sum(1 for r in ytd_records if r.get("cubie_replaced"))
 
-    # Weekend / OOH
-    weekend_mtd = sum(1 for r in mtd_records if r.get("weekend") or r.get("saturday_or_sunday"))
-    outside_hours_mtd = sum(1 for r in mtd_records if not r.get("between_8_and_8", True))
-    ooh_or_weekend = sum(
-        1 for r in mtd_records
-        if (r.get("weekend") or r.get("saturday_or_sunday") or not r.get("between_8_and_8", True))
-    )
+    # Callouts – ONLY from Callout column
+    callouts_mtd = sum(1 for r in mtd_records if r.get("callout"))
+    callouts_week = sum(1 for r in week_records if r.get("callout"))
 
     # Classification
     code_counts = Counter(
@@ -111,8 +127,10 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
         "Hardware": code_counts.get("Hardware", 0),
         "Software": code_counts.get("Software", 0),
         "User Error": code_counts.get("User Error", 0) + code_counts.get("Usererror", 0),
-        "Other": sum(v for k, v in code_counts.items()
-                     if k not in ("Hardware", "Software", "User Error", "Usererror")),
+        "Other": sum(
+            v for k, v in code_counts.items()
+            if k not in ("Hardware", "Software", "User Error", "Usererror")
+        ),
     }
 
     # Service area
@@ -123,17 +141,7 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
         for k, v in dept_ytd.most_common()
     }
 
-    top_depts = [k for k, _ in dept_ytd.most_common(8)]
-    monthly_dept: Dict[str, Dict[str, int]] = defaultdict(lambda: defaultdict(int))
-    for r in ytd_records:
-        if not r["date_submitted"]:
-            continue
-        mkey = r["date_submitted"].strftime("%Y-%m")
-        d = (r.get("department") or "Unknown").strip()
-        if d in top_depts:
-            monthly_dept[mkey][d] += 1
-
-    # Remedial / Corrective
+    # Remedial
     remedial = []
     keywords = ("replaced", "repair", "remedial", "faulty", "failed", "broken",
                 "ups", "psu", "drawer engine", "cubie")
@@ -145,37 +153,21 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
                 "work_order": r["work_order"],
                 "asset": r.get("asset_number"),
                 "department": r.get("department"),
-                "status": "Completed",
+                "product_type": r.get("product_classification") or "",
                 "commentary": (r.get("completion_comments") or "")[:250],
                 "parts": r.get("part_used") or "",
                 "date": str(r.get("date_completed") or r.get("date_submitted") or ""),
             })
 
-    # Staff note
     staff_note = (
         "Staff scheduling and credentialing confirmation is maintained outside this intake log. "
         "Confirm current credential status for nominated on-site technicians via the BD credentialing system "
         "prior to submission of this report."
     )
 
-    # System events (reboots / access)
-    reboot_keywords = ("reboot", "hard reboot", "restart", "power cycle", "ups", "access")
-    system_events = []
-    for r in mtd_records:
-        c = (r.get("completion_comments") or "").lower()
-        if any(k in c for k in reboot_keywords):
-            system_events.append({
-                "work_order": r["work_order"],
-                "asset": r.get("asset_number"),
-                "department": r.get("department"),
-                "event": (r.get("completion_comments") or "")[:200],
-                "date": str(r.get("date_completed") or r.get("date_submitted") or ""),
-            })
-
-    # KPI compliance % (based on Breach? column)
+    # KPI % – currently all Achieved
     total_kpi = len(week_records) or 1
-    achieved = sum(1 for r in week_records
-                   if str(r.get("breach") or "").strip().upper() not in ("YES", "TRUE", "Y"))
+    achieved = sum(1 for r in week_records if _kpi_status(r) == "Achieved")
     kpi_pct = round(100.0 * achieved / total_kpi)
 
     summary = {
@@ -191,13 +183,11 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
         "cubies_week": cubies_week,
         "cubies_mtd": cubies_mtd,
         "cubies_ytd": cubies_ytd,
-        "weekend_callouts_mtd": weekend_mtd,
-        "outside_hours_mtd": outside_hours_mtd,
-        "ooh_or_weekend_mtd": ooh_or_weekend,
+        "callouts_mtd": callouts_mtd,
+        "callouts_week": callouts_week,
         "hw_sw_user": hw_sw_user,
         "top_departments": list(dept_pct.items())[:10],
         "remedial_count": len(remedial),
-        "system_events_count": len(system_events),
         "data_earliest": str(earliest),
         "data_latest": str(latest),
         "record_count_all": len(records),
@@ -210,10 +200,10 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
         "log_mtd": log_mtd,
         "log_ytd_sample": log_ytd[:100],
         "prev3_monthly": dict(sorted(monthly_counts.items())),
+        "monthly_work_orders": dict(sorted(monthly_all.items())),
         "dept_pct_ytd": dept_pct,
-        "monthly_dept_trend": {k: dict(v) for k, v in sorted(monthly_dept.items())},
         "remedial": remedial,
-        "system_events": system_events,
         "staff_note": staff_note,
         "generated_at": datetime.utcnow().isoformat() + "Z",
     }
+
