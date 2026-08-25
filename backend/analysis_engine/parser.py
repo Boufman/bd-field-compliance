@@ -97,7 +97,6 @@ def _safe_str(val) -> str:
 
 
 def _clean_work_order(val) -> str:
-    """Force clean integer string – no decimals."""
     if val is None:
         return ""
     try:
@@ -145,6 +144,7 @@ def parse_excel(source: BytesIO | Path | str, original_filename: str = "intake.x
             "completion_code": _safe_str(_cell_val(ws, row, COL_MAP["completion_code"])) or "Other",
             "between_8_and_8": _parse_bool(_cell_val(ws, row, COL_MAP["between_8_and_8"])),
             "cubie_replaced": _parse_bool(_cell_val(ws, row, COL_MAP["cubie"])),
+            "callout": _parse_bool(_cell_val(ws, row, COL_MAP["callout"])),
             "saturday_or_sunday": _safe_str(_cell_val(ws, row, COL_MAP["saturday_or_sunday"])),
             "weekend": _parse_bool(_cell_val(ws, row, COL_MAP["weekend"])),
             "breach": _safe_str(_cell_val(ws, row, COL_MAP["breach"])),
