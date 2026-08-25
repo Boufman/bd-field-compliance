@@ -23,11 +23,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
-
+          
       - name: Build EXE with PyInstaller
-        run: |
-          pyinstaller --onefile --name BD_Analysis_Tool run_analysis.py
-
+      run: |
+          pyinstaller --onefile `
+            --name BD_Analysis_Tool `
+            --hidden-import backend.app `
+            --collect-submodules backend `
+            run_analysis.py
+      
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
