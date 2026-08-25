@@ -2,6 +2,7 @@
 BD / WA Health – Fortnightly Field Report
 Pyxis & WOW Service Performance
 """
+import sys
 from __future__ import annotations
 
 from datetime import datetime
@@ -34,9 +35,21 @@ WHITE = colors.white
 GREEN = colors.Color(0.10, 0.55, 0.30)
 RED = colors.Color(0.80, 0.15, 0.15)
 
-# Optional logo paths (place files next to the app or set absolute paths)
-LOGO_BD_PATH = Path('/Users/rkmaganga/Downloads/BD compliance/assets/bd_logo.png')
-LOGO_CUSTOMER_PATH = Path('/Users/rkmaganga/Downloads/BD compliance/assets/smhs_logo.png')
+def application_folder() -> Path:
+    """
+    Uses the folder containing the EXE when packaged.
+    Uses the project root when running normally in Python.
+    """
+    if getattr(sys, "frozen", False):
+        return Path(sys.executable).resolve().parent
+
+    return Path(__file__).resolve().parent.parent
+
+
+ASSETS_FOLDER = application_folder() / "assets"
+
+LOGO_BD_PATH = ASSETS_FOLDER / "bd_logo.png"
+LOGO_CUSTOMER_PATH = ASSETS_FOLDER / "smhs_logo.png"
 
 
 def _styles():
