@@ -12,7 +12,16 @@ HOST = "127.0.0.1"
 
 def start_server():
     proc = subprocess.Popen(
-        ["uvicorn", "backend.app:app", "--port", "8000"],
+        [
+            sys.executable,
+            "-m",
+            "uvicorn",
+            "backend.app:app",
+            "--host",
+            HOST,
+            "--port",
+            str(PORT),
+        ],
         cwd=str(BASE_DIR),
     )
     time.sleep(3)
