@@ -12,7 +12,7 @@ from .config import (
     CUSTOMER_NAME, PROVIDER_NAME, SITE_NAME,
 )
 from .analysis_engine import parser, reporting
-from .pdf_engine import pdf_builder
+from .pdf_engine.pdf_builder import build_pdf
 
 app = FastAPI(
     title="Field Compliance Report – BD / WA Health",
@@ -53,7 +53,7 @@ async def analyse_intake(file: UploadFile = File(...), period_end: str = Form(No
         pe = date.fromisoformat(period_end) if period_end else None
         analysis = reporting.build_report(parsed["records"], report_period_end=pe)
         meta = {"customer": CUSTOMER_NAME, "provider": PROVIDER_NAME, "site": SITE_NAME}
-        pdf_bytes = pdf_builder.build_pdf(analysis)
+        pdf_bytes = build_pdf(analysis)
         return Response(
             content=pdf_bytes,
             media_type="application/pdf",
