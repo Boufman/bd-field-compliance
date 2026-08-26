@@ -24,15 +24,9 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
-      - name: Verify source files
-        run: |
-          if (!(Test-Path "backend\pdf_engine\pdf_builder.py")) { throw "pdf_builder.py not found" }
-          if (!(Test-Path "backend\pdf_engine\__init__.py")) { throw "pdf_engine __init__.py not found" }
-          if (!(Test-Path "backend\__init__.py")) { throw "backend __init__.py not found" }
-
       - name: Build EXE with PyInstaller
         run: |
-          pyinstaller --clean --noconfirm --onefile --name BD_Analysis_Tool --paths . --hidden-import backend.app --hidden-import backend.pdf_engine --hidden-import backend.pdf_engine.pdf_builder --collect-submodules backend --collect-submodules backend.pdf_engine --collect-submodules uvicorn run_analysis.py
+          pyinstaller --onefile --name BD_Analysis_Tool run_analysis.py
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
