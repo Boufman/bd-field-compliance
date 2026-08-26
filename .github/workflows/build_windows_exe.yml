@@ -26,7 +26,7 @@ jobs:
 
       - name: Build EXE with PyInstaller
         run: |
-          pyinstaller --onefile --name BD_Analysis_Tool --hidden-import backend.app --collect-submodules backend --collect-submodules uvicorn run_analysis.py
+          pyinstaller --clean --noconfirm --onefile --name BD_Analysis_Tool --hidden-import backend.app --hidden-import backend.pdf_engine.pdf_builder --collect-submodules backend --collect-submodules backend.pdf_engine --collect-submodules uvicorn run_analysis.py
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
