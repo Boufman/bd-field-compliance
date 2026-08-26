@@ -1,2 +1,2 @@
-from .pdf_builder import build_pdf
-__all__ = ["build_pdf"]
+from . import pdf_builder
+__all__ = ["pdf_builder"]
