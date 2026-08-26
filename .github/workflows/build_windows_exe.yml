@@ -1,8 +1,6 @@
 name: Build Windows EXE
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -24,17 +22,11 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
-      - name: Verify PDF builder exists
+      - name: Build EXE
         run: |
-          if (!(Test-Path "backend\pdf_engine\pdf_builder.py")) {
-            throw "Missing backend\pdf_engine\pdf_builder.py"
-          }
+          pyinstaller --clean --noconfirm --onefile --name BD_Analysis_Tool --paths . --collect-all backend --collect-all uvicorn run_analysis.py
 
-      - name: Build EXE with PyInstaller
-        run: |
-          pyinstaller --clean --noconfirm --onefile --name BD_Analysis_Tool --paths . --hidden-import backend.app --hidden-import backend.pdf_engine --hidden-import backend.pdf_engine.pdf_builder --collect-submodules backend --collect-submodules backend.pdf_engine --collect-submodules uvicorn run_analysis.py
-
-      - name: Upload EXE artifact
+      - name: Upload EXE
         uses: actions/upload-artifact@v4
         with:
           name: BD_Analysis_Tool-windows
