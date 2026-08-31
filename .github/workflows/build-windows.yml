@@ -32,7 +32,9 @@ jobs:
             --hidden-import reporting `
             --hidden-import pdf_builder `
             --hidden-import openpyxl `
-            --hidden-import reportlab `
+            --hidden-import reportlab.lib `
+            --hidden-import reportlab.pdfgen `
+            --collect-all reportlab `
             run_report.py
 
       - uses: actions/upload-artifact@v4
