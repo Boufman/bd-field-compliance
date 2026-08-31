@@ -1,11 +1,6 @@
-"""
-BD / WA Health – Fortnightly Field Report
-Pyxis & WOW Service Performance
-"""
+from __future__ import annotations
 import sys
 from pathlib import Path
-
-from __future__ import annotations
 
 from datetime import datetime
 from io import BytesIO
