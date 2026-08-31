@@ -20,8 +20,12 @@ jobs:
       - run: |
           pyinstaller --onefile --console --name BD_Field_Compliance ^
             --paths . ^
+            --collect-submodules backend ^
+            --hidden-import backend ^
+            --hidden-import backend.analysis_engine ^
             --hidden-import backend.analysis_engine.parser ^
             --hidden-import backend.analysis_engine.reporting ^
+            --hidden-import backend.pdf_engine ^
             --hidden-import backend.pdf_engine.pdf_builder ^
             --hidden-import openpyxl ^
             --hidden-import reportlab ^
