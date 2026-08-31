@@ -26,6 +26,7 @@ jobs:
             --hidden-import uvicorn.protocols.http.auto ^
             --hidden-import uvicorn.protocols.websockets.auto ^
             --hidden-import uvicorn.lifespan.on ^
+            --hidden-import backend.config ^
             --hidden-import backend.app ^
             --hidden-import backend.analysis_engine.parser ^
             --hidden-import backend.analysis_engine.reporting ^
