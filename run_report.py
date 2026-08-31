@@ -1,8 +1,3 @@
-"""
-BD Field Compliance – CLI
-Usage:
-  BD_Field_Compliance.exe "input.xlsx" "output.pdf"
-"""
 from __future__ import annotations
 
 import sys
