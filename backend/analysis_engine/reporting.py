@@ -1,6 +1,6 @@
 """
 Fortnightly Report – aggregation & KPI engine.
-KPI: Achieved (green) if no breach, At Risk (red) if breach column contains any value.
+KPI: Achieved (green) if no breach, At Risk (red) if breach column contains the word "breach".
 Callouts: only from Callout column.
 Period ends at yesterday (exclude day of run).
 Section 3 / Appendix = same set as fortnight KPI box (week_records).
@@ -37,11 +37,11 @@ def _prev_n_months(ref: date, n: int) -> Tuple[date, date]:
 def _kpi_status(r: Dict) -> str:
     """
     KPI status based on Breach column:
+    - "At Risk" (red) if breach column contains the word "breach"
     - "Achieved" (green) if no breach
-    - "At Risk" (red) if breach column contains any value
     """
-    breach = r.get("breach")
-    if breach:  # Any truthy value (non-empty string, True, etc.) indicates a breach
+    breach = r.get("breach", "")
+    if isinstance(breach, str) and "breach" in breach.lower():
         return "At Risk"
     return "Achieved"
 
