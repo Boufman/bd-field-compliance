@@ -1,6 +1,6 @@
 """
 Fortnightly Report – aggregation & KPI engine.
-KPI: for now always Achieved (green), using total_time_resolved.
+KPI: Achieved (green) if no breach, At Risk (red) if breach column contains any value.
 Callouts: only from Callout column.
 Period ends at yesterday (exclude day of run).
 Section 3 / Appendix = same set as fortnight KPI box (week_records).
@@ -36,10 +36,13 @@ def _prev_n_months(ref: date, n: int) -> Tuple[date, date]:
 
 def _kpi_status(r: Dict) -> str:
     """
-    Temporary rule: always Achieved (green).
-    total_time_resolved is carried through so real thresholds can be added later.
+    KPI status based on Breach column:
+    - "Achieved" (green) if no breach
+    - "At Risk" (red) if breach column contains any value
     """
-    _ = r.get("total_time_resolved")
+    breach = r.get("breach")
+    if breach:  # Any truthy value (non-empty string, True, etc.) indicates a breach
+        return "At Risk"
     return "Achieved"
 
 
@@ -88,6 +91,7 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
             "completed_by": r.get("completed_by") or "",
             "cubie": r.get("cubie_replaced", False),
             "callout": bool(r.get("callout")),
+            "breach": r.get("breach") or "",
             "date_submitted": r.get("date_submitted"),
         }
 
@@ -161,9 +165,10 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
         "prior to submission of this report."
     )
 
-    # KPI % – currently all Achieved
+    # KPI % – Achieved if no breach, At Risk if breach exists
     total_kpi = len(week_records) or 1
     achieved = sum(1 for r in week_records if _kpi_status(r) == "Achieved")
+    at_risk = sum(1 for r in week_records if _kpi_status(r) == "At Risk")
     kpi_pct = round(100.0 * achieved / total_kpi)
 
     summary = {
@@ -188,6 +193,8 @@ def build_report(records: List[Dict[str, Any]], report_period_end: Optional[date
         "data_latest": str(latest),
         "record_count_all": len(records),
         "kpi_compliance_pct": kpi_pct,
+        "kpi_achieved_count": achieved,
+        "kpi_at_risk_count": at_risk,
     }
 
     return {
